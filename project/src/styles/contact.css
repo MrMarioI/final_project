@@ -1,0 +1,49 @@
+p{
+    margin-top: 50px;
+    font-style: bold;
+}
+
+form{
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+label{
+    justify-self: center;
+}
+
+.input{
+    width: 250px;
+    margin: 5px;
+    height: 25px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-item-wrapper{
+    justify-content: center;
+    align-content: center;
+}
+
+.text{
+    display: flex;
+    flex-wrap: wrap;
+    width: 600px;
+    height: 300px;
+}
+
+/* Signpup */
+
+.signup{
+    width: 100%;
+}
+
+#form-user{
+    width: 200px;
+    height: 90px
+}

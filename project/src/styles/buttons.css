@@ -1,0 +1,52 @@
+/* BUTTONS */
+
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin: 10px;
+}
+
+button:focus {
+    outline: none;
+}
+
+.input-text {
+    /* width: 50%;
+    height: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; */
+}
+
+.button-primary {
+    display: flex;
+    flex-wrap: wrap;
+    color: white;
+    background: black;
+    border: 1px solid;
+    font-size: 1rem;
+    transition: all 0.2s ease-in;
+    transition-property: color, background;
+    border-radius: 15px solid black;
+    padding: 0.5rem 0.8rem;
+    width: 30vh;
+}
+
+.button-primary:hover {
+    color: black;
+    background: white;
+    border: 1px solid;
+}
+
+.form-item-wrapper{
+    justify-content: center;
+    align-content: center;
+}
+
+/* Shopcart button */
+
+.cart{
+    width:20px;
+    border: 1px solid black;
+}

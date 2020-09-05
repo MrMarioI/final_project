@@ -1,0 +1,31 @@
+.grid {
+    margin: 20px;
+    width: calc(100% - 80px);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .grid:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+  
+  /* ---- grid-item ---- */
+  
+  .grid-item {
+    width: auto;
+    height: auto;
+    margin: 10px;
+    float: left;
+    background: dodgerblue;
+    border: 2px solid #333;
+    border-color: hsla(0, 0%, 0%, 0.5);
+    border-radius: 5px;
+  }
+
+  /* PLUS (ADD A PHOTO) */
+
+.plus {
+   float: right;
+  }
