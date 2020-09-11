@@ -1,50 +1,45 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import axios from 'axios'
 import Buttons from './Buttons'
-
+import { ApiHandler } from './../api/handler'
+// import { useHistory } from 'react-router-dom'
+const handler = ApiHandler()
 
 export default class FormContact extends Component {
-    state = {
-      name: '',
-      email: '',
-      ville: '',
-      message: ''
-    };
+  state = {
+    // définition de valeurs de base pour les tests de dev ("mettre à chaîne vide une fois dev ok")
+    name: 'test user',
+    email: 'foo@bar.com',
+    ville: 'whatever',
+    message: 'foo bar, bar bar ! bar ? foo bar baz, baz foo bar !'
+  }
 
-    handleChange = (evt) => {
-        console.log(evt);
-      this.setState({ [evt.target.name]: evt.target.value });
-    };
+  handleChange = e => this.setState({ [e.target.name]: e.target.value })
 
-    handleSubmit(e){
-        e.preventDefault();
-        console.log(this.state.name)
-        // const name = document.getElementById('name').value;
-        // const email = document.getElementById('email').value;
-        // const ville = document.getElementById('ville').value;
-        // const message = document.getElementById('message').value;
-       const url="http://localhost:3001/contact";
-       const data = {
-        name: this.state.name,   
-        email: this.state.email,
-        ville: this.state.ville,  
-        message: this.state.message
+  handleSubmit = async e => {
+    e.preventDefault() // classique : empêche l'event submit du formulaire de rafraîchir la page
+    const { name, email, ville, message } = this.state // destructuration de l'objet this.state
+    try {
+      await handler.post('/contact', {
+        name,
+        email,
+        ville,
+        message
+      })
+      alert("c'est bon connard")
+    } catch (error) {
+      console.error(error)
     }
-        axios.post(url,data)
-        .then((response)=>{
-         console.log(response)
-            if (response.data.msg === 'success'){
-                alert("Message Sent."); 
-                this.resetForm()
-            }else if(response.data.msg === 'fail'){
-                alert("Message failed to send.")
-            }
-        })
-    }
+  }
 
-    resetForm(){
-        document.getElementById('form_user').reset();
-    }
+  // contactButton = (e) => {
+  //   let history = useHistory();
+  // }
+
+  // handleClick = (e) => {
+  //   history.push("/contact");
+  // }
+
   render () {
     return (
       <form
@@ -53,70 +48,71 @@ export default class FormContact extends Component {
         className='form'
         id='form_user'
         onChange={this.handleChange}
-        onSubmit={this.handleSubmit.bind(this)} noValidate
+        onSubmit={this.handleSubmit}
       >
-        
-          <label htmlFor='lastname' className='label-ref' aria-label='Nom'>
-            Nom :
-          </label>
-          <input
-            id='name'
-            type='text'
-            className='input-text input'
-            placeholder='Name'
-            value={this.state.name}
-            name='name'
-            required
-            noValidate
-          />
-        
-          <label htmlFor='email' className='label-ref' aria-label='Email'>
-            Email :
-          </label>
-          <input
-            id='email'
-            type='email'
-            className='input-text input'
-            placeholder='Email'
-           value={this.state.email}
-            name='email'
-            required
-          />
-        
-        
-          <label id="ville" htmlFor='firstname' className='label-ref' aria-label='Ville'>
-            Ville :
-          </label>
-          <input
-            id='ville'
-            type='text'
-            className='input-text input'
-            value={this.state.ville}
-            name='ville'
-          />
-    
-          <label
-          
-            htmlFor='post-descr'
-            className='label-descr label'
-            aria-label='Message'
-          >
-            Votre message :
-          </label>
-          <input
-            type='text'
-            className='text'
-            value={this.state.message}
-            name='message'
-          /> 
-         
-          <Buttons
-            type='submit'
-            aria-label='Envoyer'
-            className='button button-primary white'
-            text='Envoyer'
-          />
-      
+        <label htmlFor='lastname' className='label-ref' aria-label='Nom'>
+          Nom :
+        </label>
+        <input
+          id='name'
+          type='text'
+          className='input-text input'
+          placeholder='Name'
+          defaultValue={this.state.name}
+          name='name'
+          required
+          noValidate
+        />
+
+        <label htmlFor='email' className='label-ref' aria-label='Email'>
+          Email :
+        </label>
+        <input
+          id='email'
+          type='email'
+          className='input-text input'
+          placeholder='Email'
+          defaultValue={this.state.email}
+          name='email'
+          required
+        />
+
+        <label
+          id='ville'
+          htmlFor='firstname'
+          className='label-ref'
+          aria-label='Ville'
+        >
+          Ville :
+        </label>
+        <input
+          id='ville'
+          type='text'
+          className='input-text input'
+          defaultValue={this.state.city}
+          name='ville'
+        />
+
+        <label
+          htmlFor='post-descr'
+          className='label-descr label'
+          aria-label='Message'
+        >
+          Votre message :
+        </label>
+        <input
+          type='text'
+          className='text'
+          defaultValue={this.state.message}
+          name='message'
+        />
+
+        <Buttons
+          type='submit'
+          aria-label='Envoyer'
+          className='button button-primary white'
+          text='Envoyer'
+        />
       </form>
     )
   }

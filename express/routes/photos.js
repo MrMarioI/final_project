@@ -1,11 +1,12 @@
 const router = new require('express').Router()
+const uploader = require("./../config/cloudinary");
 const PhotoModel = require('./../models/Photos')
 const galeriesModel = require('./../models/Galeries')
 
 // GET : /photos (toutes les photos)
 router.get('/', async (req, res, next) => {
   try {
-    const photos = await PhotoModel.find()
+    const photos = await PhotoModel.getAll();
     console.log("ici")
     res.json(photos)
   } catch (err) {
@@ -34,10 +35,11 @@ router.get('/:id', async (req, res, next) => {
 })
 
 // POST (poster une nouvelle photo)
-router.post('/add_photos', async (req, res, next) => {
+router.post('/add_photos', uploader.single("avatar"), async (req, res, next) => {
+  const photo = new PhotoModel(req.body);
+
   try {
-    const newPhoto = await PhotoModel.create(req.body)
-    res.json(newPhoto)
+
   } catch (err) {
     next(err)
   }

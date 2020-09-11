@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { APIHandler } from './../../api/handler'
+import { ApiHandler } from './../../api/handler'
 
-const handler = new APIHandler('/orders')
+const handler = new ApiHandler('/orders')
 
 export default class Posts extends Component {
   state = {

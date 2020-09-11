@@ -1,25 +1,36 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const { query } = require('../config/mysql');
 
-const userSchema = new Schema({
-  first_name: String,
-  last_name: String,
-  email: String,
-  password: String,
-  address: {
-    rue: String,
-    Numero: Number,
-    Zipcode: Number,
-    city: String
-  },
-  email: String,
-  role: {
-    type: String,
-    enum: ['Admin', 'User'],
-    default: 'User'
+class UserModel {
+
+  constructor(user) {
+    this.name = user.name;
+    this.mail = user.mail;
+    this.password = user.password;
   }
-})
 
-const UserModel = mongoose.model('User', userSchema)
+  // Create
 
-module.exports = UserModel
+  async addNew() {
+    const request = `INSERT INTO Users (name, mail, password) VALUES (?, ?, ?)`;
+    return query(request, [this.name, this.mail, this.password]);
+  }
+
+  // Read
+
+  static async getAll(){
+    const request = 'SELECT * FROM Users';
+    return query(request);
+  }
+
+  static async getByMail(mail) {
+    const request = 'SELECT * FROM Users WHERE mail = ?';
+    return query(request, [mail]);
+  }
+
+  static async getById(userId) {
+    const request = 'SELECT pseudo, mail, typeId FROM Users WHERE accountId = ?';
+    return query(request, [userId]);
+  }
+}
+
+module.exports = UserModel;

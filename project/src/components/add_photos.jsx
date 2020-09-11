@@ -1,9 +1,9 @@
 import React from 'react'
 import Buttons from './Buttons'
-import { APIHandler } from "./../api/handler";
+import { ApiHandler } from './../api/handler'
 
 
-const apiHandler = new APIHandler("/api/products");
+const apiHandler = new ApiHandler("/api/photos");
 
 const action5 = () => console.log("action 5");
 const handleSubmit = async (evt) => {
@@ -53,10 +53,10 @@ export default function Add_photos() {
       <label htmlFor="category" className="label-main-cat label">Galeries :</label>
       <select id="category" className="select" required>
         <option value="-1" disabled selected>Choisir une gallerie</option>
-        <option value="concerts">Concerts</option>
-        <option value="mariages">Mariages</option>
-        <option value="paysages">Paysages</option>
-        <option value="portraits">Portraits</option>
+        <option value="{1}">Concerts</option>
+        <option value="{2}">Mariages</option>
+        <option value="{4}">Paysages</option>
+        <option value="{3}">Portraits</option>
       </select>
     </div>
 

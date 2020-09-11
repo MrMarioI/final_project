@@ -10,7 +10,7 @@ Galeries:[]
 
    async componentWillMount() {
         // console.log(this.props.match.params.name)
-        const data = await axios.get(process.env.REACT_APP_BACKEND_URL + "/galeries")
+        const {data} = await axios.get(process.env.REACT_APP_BACKEND_URL + "/galeries/" + this.props.match.params.name)
        console.log(data)
         //  .then(res =>{
         this.setState({ galeries: this.state.photos })
@@ -21,6 +21,7 @@ Galeries:[]
         // const { galerie } = this.state
         return (
             <div>
+                {this.state.galeries && console.log(this.state.galeries)}
     {this.state.galeries && this.state.galeries.map((galerie, i) => (
             <div key={i} >
         <Photos props={this.state.galerie}/>

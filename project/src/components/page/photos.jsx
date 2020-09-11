@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { APIHandler } from './../../api/handler'
+import { ApiHandler } from './../../api/handler'
 import './../../styles/tables.css'
 
-const handler = new APIHandler('/galeries')
+const handler = new ApiHandler('/galeries')
 
 export default class Photos extends Component {
   state = {
@@ -14,18 +14,20 @@ export default class Photos extends Component {
     this.setState({ galeries: apiRes.data })
   }
 
-  
   render () {
     const { galeries } = this.state
     return (
       <div>
-          <div className='grid' data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'>
+        <div
+          className='grid'
+          data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'
+        >
           {galeries.map((galeries, i) => (
             <div key={i} className='grid-item'>
               {galeries.name}
             </div>
           ))}
-          </div>
+        </div>
       </div>
     )
   }

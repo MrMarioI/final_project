@@ -1,66 +1,56 @@
-require('dotenv').config()
-require('./config/mongo')
+var mysql = require('mysql');
+var express = require('express');
+var session = require('express-session');
+var bodyParser = require('body-parser');
+var path = require('path');
 
-const express = require('express')
-const bodyParser = require('body-parser')
-const cookieParser = require('cookie-parser')
-const nodemailer = require('nodemailer')
-const session = require('express-session')
-const mongoose = require('mongoose')
-const MongoStore = require('connect-mongo')(session)
-const cors = require('cors')
-const morgan = require('morgan')
-const app = express()
-
-// POST SETUP
-app.use(express.json())
-
-// CORS SETUP
-app.use(cors('*'))
-
-// API CALL LOGGIN
-app.use(morgan('dev'))
-
-// SESSION SETUP
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    cookie: { maxAge: 60000 }, // in millisec
-    store: new MongoStore({
-      mongooseConnection: mongoose.connection,
-      ttl: 24 * 60 * 60 // 1 day    
-    }),
-    saveUninitialized: true,
-    resave: true
-  })
-)
-
-app.get('/', (req, res) => res.send('hello :) my api is working'))
-
-app.use('/photos', require('./routes/photos'))
-app.use('/users', require('./routes/users'))
-app.use('/categories', require('./routes/category'))
-app.use('/galeries', require('./routes/galeries'))
-app.use('/contact', require('./routes/mail'))
-app.use('/packs', require('./routes/packs'))
-app.use('/orders', require('./routes/orders'))
-// app.use('/contact', require('./routes/sendmail'))
-
-
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors());
-
-console.log("SALUT TOI")
-
-app.post('/contact', (req, res) => {
-
-console.log("><><><", req.email);
-
+var connection = mysql.createConnection({
+	host     : 'localhost',
+	user     : 'root',
+	password : '',
+	database : 'nodelogin'
 });
-console.log("BYE")
-// 404
 
+var app = express();
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
+app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.json());
 
-module.exports = app
+app.get('/', function(request, response) {
+	response.sendFile(path.join(__dirname + '/login.html'));
+});
+
+app.post('/auth', function(request, response) {
+	var username = request.body.username;
+	var password = request.body.password;
+	if (username && password) {
+		connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
+			if (results.length > 0) {
+				request.session.loggedin = true;
+				request.session.username = username;
+				response.redirect('/home');
+			} else {
+				response.send('Incorrect Username and/or Password!');
+			}			
+			response.end();
+		});
+	} else {
+		response.send('Please enter Username and Password!');
+		response.end();
+	}
+});
+
+app.get('/home', function(request, response) {
+	if (request.session.loggedin) {
+		response.send('Welcome back, ' + request.session.username + '!');
+	} else {
+		response.send('Please login to view this page!');
+	}
+	response.end();
+});
+
+app.listen(3000);

@@ -10,7 +10,7 @@ export default function Dashboarduser() {
             <ul>
             <li><a className="userlinks" href="#">Votre profil</a>
             <ul className="sous">
-                <li><a>Modifier votre profil</a></li>
+                <li><a href="/profil_edit">Modifier votre profil</a></li>
                 <li><a>Supprimer votre profil</a></li>
             </ul>
             </li>

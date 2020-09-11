@@ -3,9 +3,11 @@ const galerieModel = require('./../models/Galeries');
 const photoModel = require('./../models/Photos');
 
 // GET : /galeries (toutes les galeries)
-router.get('/', async (req, res, next) => {
+router.get('/:type', async (req, res, next) => {
+  const { type } = req.params;
+  console.log('ICI ' + type);
   try {
-    const galerie = await galerieModel.find(req.params).populate('Photos')
+    const galerie = await galerieModel.find({"name": type}).populate('Photos')
     res.json(galerie)
   } catch (err) {
     next(err)
@@ -13,14 +15,14 @@ router.get('/', async (req, res, next) => {
 })
 
 // GET (récupérer une galerie de la bdd grâce à son _id )
-router.get('/:id', async (req, res, next) => {
-  try {
-    const galerie = await galerieModel.findById(req.params.id).populate('Photos')
-    res.json(galerie)
-  } catch (err) {
-    next(err)
-  }
-})
+// router.get('/:id', async (req, res, next) => {
+//   try {
+//     const galerie = await galerieModel.findById(req.params.id).populate('Photos')
+//     res.json(galerie)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
 
 // POST (créer une nouvelle galerie)
 router.post('/add_galerie', async (req, res, next) => {

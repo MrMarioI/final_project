@@ -1,20 +1,37 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const { query } = require('../config/mysql');
 
-const photoSchema = new Schema({
-  type: String,
-  name: String,
-  metadonnées: {
-    GPS: String,
-    Date: Date,
-    taille: String},
-  Price: Number,
-  image: String,
-  Galeries: [{
-    type: Schema.Types.ObjectId, 
-    ref : 'Galeries'}]
-})
+class Photos {
 
-const PhotoModel = mongoose.model('Photos', photoSchema)
+  constructor(photo) {
+    this.photoId = photo.photoId;
+    this.date = photo.date;
+    this.taille = photo.taille;
+  }
 
-module.exports = PhotoModel
+  // Create
+
+  async addNew() {
+    const request = `INSERT INTO Photos (photoId, date, taille) VALUES (?, ?, ?)`;
+    return query(request, [this.photoId, this.date, this.taille]);
+  }
+
+  // Read
+
+  static async getAll(){
+    const request = 'SELECT * FROM Photos';
+    return query(request);
+  }
+
+// faire la requête afin d'afficher la photo correspondant à la gallerie séléctionnée.
+  static async getByType(typeId) {
+    const request = 'SELECT * FROM Photos WHERE typeId = ?';
+    return query(request, [typeId]);
+  }
+
+  static async getById(photoId) {
+    const request = 'SELECT * FROM Photos WHERE photoId = ?';
+    return query(request, [photoId]);
+  }
+}
+
+module.exports = Photos;
