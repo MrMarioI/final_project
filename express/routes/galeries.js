@@ -1,13 +1,13 @@
 const router = new require('express').Router()
-const galerieModel = require('./../models/Galeries');
-const photoModel = require('./../models/Photos');
+const TypeModel = require('./../models/TypePhoto');
+const Photos = require('./../models/Photos');
 
 // GET : /galeries (toutes les galeries)
 router.get('/:type', async (req, res, next) => {
   const { type } = req.params;
   console.log('ICI ' + type);
   try {
-    const galerie = await galerieModel.find({"name": type}).populate('Photos')
+    const galerie = await TypeModel.getAll({"name": type}).populate('Photos')
     res.json(galerie)
   } catch (err) {
     next(err)
@@ -27,7 +27,7 @@ router.get('/:type', async (req, res, next) => {
 // POST (créer une nouvelle galerie)
 router.post('/add_galerie', async (req, res, next) => {
   try {
-    const newGalerie = await galerieModel.create(req.body)
+    const newGalerie = await galerieModel.addNew(req.body)
     res.json(newGalerie)
   } catch (err) {
     next(err)

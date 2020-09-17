@@ -1,12 +1,11 @@
 const mysql = require('mysql');
-const promisify = require('bluebird');
+const bluebird = require('bluebird');
 
 const sql = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-  multipleStatements: true
+  database: process.env.DB_DATABASE
 });
 // Pool (plusieurs connexion à la DB) permet de mieux gérer la connection que createConnection (connexion unique à la DB)
 
@@ -17,7 +16,7 @@ const sql = mysql.createPool({
 //     console.log("HEY, c'est connecté à la db, t'es bon !!")
 //   }
 // })
-
+sql.query = bluebird.promisify(sql.query);
  async function query(req, params){
   return sql.query(req, params);
 }

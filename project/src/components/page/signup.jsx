@@ -6,19 +6,19 @@ import './../../styles/buttons.css'
 // import AuthProvider from '../auth/AuthProvider
 import axios from 'axios'
 
-
 export default class Signup extends Component {
   state = {
     // définition de valeurs de base pour les tests de dev ("mettre à chaîne vide une fois dev ok")
-    first_name: 'Jane',
-    last_name: 'Doe',
-    email: 'j.doe@foo.bar',
-    password: '12345'
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: ''
   }
 
   createUser = async e => {
     e.preventDefault() // classique : empêche l'event submit du formulaire de rafraîchir la page
-    await axios.post("http://localhost:5555/signup", this.state)
+    // await axios.post("http://localhost:5555/signup", this.state)
+    console.log('>GOOD')
   }
 
   static contextType = AuthContext // la classe Signup est désormais 'abonnée' au AuthProvider
@@ -30,9 +30,9 @@ export default class Signup extends Component {
 
   handleSubmit = async e => {
     e.preventDefault() // classique : empêche l'event submit du formulaire de rafraîchir la page
-
     const { first_name, last_name, email, password } = this.state // destructuration de l'objet this.state
-    await axios.post("http://localhost:5555/signup")
+    // console.log(first_name, last_name, email, password)
+    await axios.post('http://localhost:5555/signup', { first_name, last_name, email, password })
     // avant de passer l'objet formData (fd) à components/auth/AuthProvider
     this.context.signup(this.state, () => {
       this.props.history.push('/signin')
@@ -50,13 +50,13 @@ export default class Signup extends Component {
         {/*  {{#if msg}}
 <p class="message {{msg.status}}">{{msg.text}}</p>
    {{/if}} */}
-        <form onChange={this.handleInput} onSubmit={this.createUser}>
+        <form onChange={this.handleInput} onSubmit={this.handleSubmit}>
           <div className='form-item-wrapper flexed-item'>
-            <label htmlFor='firstname' className='label-ref label'>
+            <label htmlFor='first_name' className='label-ref label'>
               Prénom :
             </label>
             <input
-              id='firstname'
+              id='first_name'
               type='text'
               name='first_name'
               className='input-text input'
@@ -69,7 +69,7 @@ export default class Signup extends Component {
               Nom :
             </label>
             <input
-              id='lastname'
+              id='last_name'
               name='last_name'
               type='text'
               className='input-text input'

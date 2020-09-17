@@ -26,7 +26,7 @@ export default class FormContact extends Component {
         ville,
         message
       })
-      alert("c'est bon connard")
+      alert("c'est bon GOOD")
     } catch (error) {
       console.error(error)
     }

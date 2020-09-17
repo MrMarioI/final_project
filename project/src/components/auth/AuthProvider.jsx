@@ -90,10 +90,11 @@ export default class AuthProvider extends Component {
       await handler.post('/signup', infos)
       clbk() // so ok : appel du callback défini @ Signup
     } catch (err) {
-      const method = err.response.status.toString().startsWith('4')
-        ? 'warn'
-        : 'error'
-      console[method](err.response.data)
+      // const method = err.response.status.toString().startsWith('4')
+      //   ? 'warn'
+      //   : 'error'
+      // console[method](err.response.data);
+      console.log(err);      
     }
   }
 

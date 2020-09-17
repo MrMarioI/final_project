@@ -5,7 +5,6 @@ import { Switch, Route } from 'react-router-dom'
 
 import About from './components/page/about'
 import Concert from './components/page/concert'
-
 import Gallery from './components/Gallery'
 import Home from './components/page/home'
 import Contact from './components/page/contact'

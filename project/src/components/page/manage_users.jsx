@@ -2,6 +2,15 @@ import React from 'react'
 import './../../styles/tables.css'
 
 export default function Manage_users() {
+    // state = {
+  //   users: []
+  // }
+
+  // async componentDidMount () {
+  //   const apiRes = await handler.getAll()
+  //   this.setState({ users: apiRes.data })
+  // }
+  // const { users } = this.state;
     return (
         <div>
           <h1 className='form-title'>Edition et suppression des users !</h1>

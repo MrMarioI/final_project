@@ -2,17 +2,18 @@ const { query } = require('../config/mysql');
 
 class UserModel {
 
-  constructor(user) {
-    this.name = user.name;
-    this.mail = user.mail;
+  constructor(user) { 
+    this.first_name = user.first_name;
+    this.last_name = user.last_name;
+    this.email = user.email;
     this.password = user.password;
   }
 
   // Create
 
   async addNew() {
-    const request = `INSERT INTO Users (name, mail, password) VALUES (?, ?, ?)`;
-    return query(request, [this.name, this.mail, this.password]);
+    const request = `INSERT INTO Users (first_name, last_name, email, password, role) VALUES (?, ?, ?, ?, 2)`;
+    return query(request, [this.first_name, this.last_name, this.email, this.password]);
   }
 
   // Read
