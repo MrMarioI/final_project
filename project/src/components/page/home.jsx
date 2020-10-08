@@ -3,6 +3,7 @@ import Andrea from './../../assets/img/AndreaMetz.jpeg'
 import Tom from './../../assets/img/TomProphetsOfRage.jpeg'
 import Thomas from './../../assets/img/Thom-MaricaWedding.jpeg'
 import Clusaz from './../../assets/img/lacluz.jpg'
+import './../../styles/Home.css'
 
 export default function Home () {
   return (

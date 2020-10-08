@@ -1,10 +1,10 @@
-import React from 'react'
-import Photos from './photos'
+import React from 'react';
+import Photos from './photos';
 
 export default function Portrait() {
-    return (
-        <div>
-        <Photos />
-        </div>
-    )
+	return (
+		<div>
+			<Photos />
+		</div>
+	);
 }

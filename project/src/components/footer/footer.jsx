@@ -1,5 +1,5 @@
 import React from 'react'
-import SocialFollow from './../SocialFollow'
+import SocialFollow from './SocialFollow'
 import './../../styles/footer.css'
 import './../../styles/Home.css'
 

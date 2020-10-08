@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import AuthContext from "./../../components/auth/AuthContext";
 import styled from 'styled-components'
 
 const Ul = styled.ul`
+    text-decoration: none;
     list-style: none;
     display: flex;
     flex-flow: row nowrap;
 
 li{
     padding: 18px 10px;
+    text-decoration: none;
 }
 
 @media (max-width: 1024px){
@@ -31,8 +34,10 @@ li{
     a{
         text-decoration: none;  
     }
-}
-`
+}`
+
+
+// const AuthContextValue = useContext(AuthContext);
 const RightNav = ({ open }) => {
     return (
         <Ul open={open}>
@@ -42,7 +47,7 @@ const RightNav = ({ open }) => {
     <li> <a href="/galeries/paysages">Paysages</a> </li>
     <li> <a href="/galeries/portraits">Portraits</a> </li>
     <li> <a href="/contact">Contact</a> </li>
-    <li> <a href="/signin">Sign In</a> </li>
+    <li> <a href="/signin">Connexion</a> </li>
     </Ul>
 
     )

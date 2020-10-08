@@ -27,7 +27,7 @@ export default class AuthProvider extends Component {
 
   getUserByToken = () => {
     handler
-      .get('/api/auth/get-user-by-token')
+      .get('/get-user-by-token')
       .then(({ data }) => {
         this.setState({ currentUser: data, isSignedIn: true })
       })
@@ -73,9 +73,11 @@ export default class AuthProvider extends Component {
         email,
         password
       })
+      console.log("ICIICICICICC STOREEEEEEE ",apiRes.data.user)
       // si le signin se passe bien ...
       this.setLocalAuthToken(apiRes.data.token) // écrit le token dans localStorage
       this.setCurrentUser(apiRes.data.user, clbk)
+
     } catch (err) {
       // console.error(err.response.data); // si erreur ...
     }

@@ -15,17 +15,19 @@ class TypeModel {
   }
 
   // Read
-
+// Tout
   static async getAll(){
     const request = 'SELECT * FROM TypePhoto';
     return query(request);
   }
 
+  // Par nom de galerie
   static async getByName(typePhotoName) {
     const request = 'SELECT * FROM TypePhoto WHERE typePhotoName = ?';
     return query(request, [typePhotoName]);
   }
 
+  // Par ID de galerie
   static async getById(typePhotoId) {
     const request = 'SELECT typePhotoId FROM TypePhoto WHERE typePhotoId = ?';
     return query(request, [typePhotoId]);

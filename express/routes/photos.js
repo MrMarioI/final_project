@@ -35,8 +35,9 @@ router.get('/:id', async (req, res, next) => {
 })
 
 // POST (poster une nouvelle photo)
-router.post('/add_photos', uploader.single("avatar"), async (req, res, next) => {
+router.post('/add_photos', uploader.single("photos"), async (req, res, next) => {
   const photo = new PhotoModel(req.body);
+// ajouter cloudinary  ici (ref auth signup)
 
   try {
 

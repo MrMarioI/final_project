@@ -1,9 +1,9 @@
-p{
+p {
     margin-top: 50px;
     font-style: bold;
 }
 
-form{
+form {
     width: 100%;
     margin-top: 50px;
     display: flex;
@@ -13,11 +13,11 @@ form{
     align-content: center;
 }
 
-label{
+label {
     justify-self: center;
 }
 
-.input{
+.input {
     width: 250px;
     margin: 5px;
     height: 25px;
@@ -25,12 +25,12 @@ label{
     flex-wrap: wrap;
 }
 
-.form-item-wrapper{
+.form-item-wrapper {
     justify-content: center;
     align-content: center;
 }
 
-.text{
+.text {
     display: flex;
     flex-wrap: wrap;
     width: 600px;
@@ -39,11 +39,11 @@ label{
 
 /* Signpup */
 
-.signup{
+.signup {
     width: 100%;
 }
 
-#form-user{
+#form-user {
     width: 200px;
     height: 90px
 }

@@ -1,31 +1,31 @@
-.dashadm{
+.dashadm {
     list-style: none;
 }
 
-.userlinks{
+.userlinks {
     margin-right: 20px;
     text-decoration: none;
 }
 
-ul{
+ul {
     list-style-type: none;
     margin-left: 20%;
 }
 
-ul li{
+ul li {
     float: left;
     width: 25%;
     text-align: center;
     position: relative;
 }
 
-ul::after{
+ul::after {
     content: "";
     display: table;
     clear: both;
 }
 
-a{
+a {
     display: block;
     text-decoration: none;
     color: black;
@@ -33,7 +33,7 @@ a{
     padding: 10px 0px;
 }
 
-.sous{
+.sous {
     display: none;
     box-shadow: 0px 1px 2px #CCC;
     background-color: white;
@@ -42,32 +42,37 @@ a{
     width: 100%;
     z-index: 1000;
 }
- ul li:hover .sous{
+
+ul li:hover .sous {
     display: block;
 }
-.sous li{
+
+.sous li {
     float: none;
     width: 100%;
     text-align: center;
 }
-.sous a{
+
+.sous a {
     border-bottom: none;
     cursor: pointer;
 }
-.sous a:hover{
+
+.sous a:hover {
     border-bottom: none;
-    background-color: RGBa(200,200,200,0.1);
+    background-color: RGBa(200, 200, 200, 0.1);
 }
-.deroulant > a::after{
-    content:" ▼";
+
+.deroulant>a::after {
+    content: " ▼";
     font-size: 12px;
 }
 
 /* Shopcart */
 
-.shop{
+.shop {
     display: flex;
     flex-wrap: wrap;
     margin-left: 450px;
-    margin-top:-50px;
+    margin-top: -50px;
 }

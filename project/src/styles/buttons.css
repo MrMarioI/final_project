@@ -39,14 +39,14 @@ button:focus {
     border: 1px solid;
 }
 
-.form-item-wrapper{
+.form-item-wrapper {
     justify-content: center;
     align-content: center;
 }
 
 /* Shopcart button */
 
-.cart{
-    width:20px;
+.cart {
+    width: 20px;
     border: 1px solid black;
 }

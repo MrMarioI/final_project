@@ -1,10 +1,10 @@
-import React from 'react'
-import Photos from './photos'
+import React from 'react';
+import Photos from './photos';
 
-export default function Concert () {
-  return (
-   <div>
-     <Photos />
-   </div>
-  )
+export default function Concert() {
+	return (
+		<div>
+			<Photos />
+		</div>
+	);
 }

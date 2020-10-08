@@ -1,5 +1,5 @@
 const router = new require('express').Router()
-const TypeModel = require('./../models/TypePhoto');
+const TypeModel = require('../models/TypePhoto');
 const Photos = require('./../models/Photos');
 
 // GET : /galeries (toutes les galeries)

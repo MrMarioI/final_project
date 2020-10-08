@@ -1,8 +1,10 @@
-const { query } = require('../config/mysql');
+const {
+  query
+} = require('../config/mysql');
 
 class UserModel {
 
-  constructor(user) { 
+  constructor(user) {
     this.first_name = user.first_name;
     this.last_name = user.last_name;
     this.email = user.email;
@@ -18,18 +20,21 @@ class UserModel {
 
   // Read
 
-  static async getAll(){
+  //Tous les users inscrits
+  static async getAll() {
     const request = 'SELECT * FROM Users';
     return query(request);
   }
 
-  static async getByMail(mail) {
-    const request = 'SELECT * FROM Users WHERE mail = ?';
-    return query(request, [mail]);
+  // Trouver les users par leur email
+  static async getByMail(email) {
+    const request = 'SELECT * FROM Users WHERE email = ?';
+    return query(request, [email]);
   }
 
+  // Trouver les users par leur ID.
   static async getById(userId) {
-    const request = 'SELECT pseudo, mail, typeId FROM Users WHERE accountId = ?';
+    const request = 'SELECT first_name, email FROM Users WHERE userId = ?';
     return query(request, [userId]);
   }
 }

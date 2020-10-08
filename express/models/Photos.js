@@ -5,7 +5,9 @@ class Photos {
   constructor(photo) {
     this.photoId = photo.photoId;
     this.date = photo.date;
+    this.type = photo.typePhotosId;
     this.taille = photo.taille;
+    this.user = photo.userId;
   }
 
   // Create
@@ -22,7 +24,7 @@ class Photos {
     return query(request);
   }
 
-// faire la requête afin d'afficher la photo correspondant à la gallerie séléctionnée.
+// faire la requête afin d'afficher la photo correspondant à la galerie séléctionnée.
   static async getByType(typeId) {
     const request = 'SELECT * FROM Photos WHERE typeId = ?';
     return query(request, [typeId]);
