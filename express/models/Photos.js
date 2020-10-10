@@ -34,6 +34,14 @@ class Photos {
     const request = 'SELECT * FROM Photos WHERE photoId = ?';
     return query(request, [photoId]);
   }
+
+  //  Il faut récupérer les photos correspondant à un user
+
+  static async getPhotoUser(Photos) {
+const request = 'SELECT * FROM Photos WHERE ownerId = ?;';
+return query(request, [Photos]);
+  }
+
 }
 
 module.exports = Photos;

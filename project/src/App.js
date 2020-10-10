@@ -43,7 +43,7 @@ function App () {
           <Route path='/galeries/:name' component={Gallery} />
           <Route path='/contact' component={Contact} />
           {/* <ProtectedRoute path="/dashboard" component={Dashboard} /> */}
-          <Route path='/dashboard' component={Dashboard_user} />
+          <ProtectedRoute path='/dashboard/' component={Dashboard_user} />
           <Route path='/signin' component={SignIn} />
           <Route path='/signup' component={Signup} />
           <Route path='/manage_users' component={Manage_users} />

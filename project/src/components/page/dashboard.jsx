@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import AuthContext from "./../../components/auth/AuthContext";
 import User from "./../../components/page/dashboard_user"
+import Photos from './photos';
+
 
 
 
@@ -9,16 +11,18 @@ export default function Dashboard() {
   console.log("AuthContextValue ? >>> ", AuthContextValue);
 
   return (
+    
     // Boolean(AuthContextValue.currentUser) && (
-      <div>LALALALALALLA
-        {/* <h1 className="title">Dashboard</h1>
-        <p>Welcome {AuthContextValue.currentUser[0].first_name} !</p>
+      <div>
+        {/* <p>Welcome {AuthContextValue.currentUser.first_name} !</p>
         <hr />
-        <User context={AuthContextValue} />
-        {Boolean(AuthContextValue.currentUser[0].role === "admin") && (
+        <User context={AuthContextValue} /> */}
+        {/* {Boolean(AuthContextValue.currentUser.role === "admin") && (
           <div><a href="/dashboard-admin">Profil administrateur</a></div>
         )} */}
+      {/* <Photos />  */}
       </div>
+     
     )
   // );
 }

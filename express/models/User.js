@@ -34,9 +34,21 @@ class UserModel {
 
   // Trouver les users par leur ID.
   static async getById(userId) {
-    const request = 'SELECT first_name, email FROM Users WHERE userId = ?';
+    const request = 'SELECT first_name, last_name, email FROM Users WHERE userId = ?';
     return query(request, [userId]);
   }
+
+  // update un user.
+  static async put(first_name, last_name, email, userId) {
+    const request = 'UPDATE Users SET first_name = ?, last_name = ?, email = ? WHERE id = ?';
+    return query(request, [first_name, last_name, email]);
+  }
+
+  static async delete(id) {
+    const request = 'DELETE FROM Users WHERE id = ?';
+    return query(request, [id]);
+  }
+
 }
 
 module.exports = UserModel;

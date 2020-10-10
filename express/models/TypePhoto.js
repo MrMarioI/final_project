@@ -32,6 +32,12 @@ class TypeModel {
     const request = 'SELECT typePhotoId FROM TypePhoto WHERE typePhotoId = ?';
     return query(request, [typePhotoId]);
   }
+
+ static async getByType(typePhoto) {
+   const request = 'SELECT * FROM Photos WHERE typePhotoId = ?';
+return query(request, [typePhoto]);
+ }
+ 
 }
 
 module.exports = TypeModel;

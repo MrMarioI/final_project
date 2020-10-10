@@ -1,48 +1,103 @@
-import React, { Component, useContext } from 'react'
-import AuthContext from './../components/auth/AuthContext'
+import React, { Component, useContext } from 'react';
+import AuthContext from './../components/auth/AuthContext';
+import AuthProvider from './auth/AuthProvider';
 import './../styles/contact.css';
 import './../styles/buttons.css';
+import { ApiHandler } from './../api/handler';
+import axios from 'axios';
+const handler = ApiHandler();
 
 export default class profil_edit extends Component {
 	state = {
+		isEditMode: false,
 		last_name: '',
+		first_name: '',
 		email: '',
-	}
+		userId: '',
+	};
+
+	static contextType = AuthContext;
+
+	handleChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
 
-static contextType =  AuthContext; 
-
-componentDidMount () {
-	console.log("EDIIIIT PROFFIIIIIL : ", this.context.currentUser.email)
-	// this.setState({email: this.context.currentUser.last_name})
-}
 	// const currentUser = contextType.currentUser
 	// console.log("TEST", currentUser)
+// componentDidMount(){
+// 	const {match: {currentUser}} = this.props;
+// axios.get(`/profil_edit/${currentUser.userId}`)
+// .then(({data:Users}) => {
+// 	this.setState({Users})
+// })
+// }
+
+
+
+	updateUser = async (e) => {
+		e.preventDefault(); // classique : empêche l'event submit du formulaire de rafraîchir la page
+
+		try {
+			const apiRes = await handler.put('/users/' + this.context.currentUser.userId, {
+				// ci-dessous : prend la valeur du state (si modifié) OU la valeur originale provenant de AuthContext
+				first_name: this.state.first_name || this.context.currentUser.first_name,
+				last_name: this.state.last_name || this.context.currentUser.last_name,
+				email: this.state.email || this.context.currentUser.email
+			
+			});
+			console.log("API RES LOG", apiRes);
+			this.context.setCurrentUser(apiRes.data.infos); // mise à jour AuthContext avec les nouvelles infos user
+		} catch (apiErr) {
+			console.error(apiErr);
+		}
+	};
 
 	render() {
-		
+// 		let id = this.props.currentUser;
+//   let url = "/profil_edit/" + currentUser;
 		return (
 			<div>
-						<form method="post" action="/" className="form" enctype="multipart/form-data">
-				<h2 className="title">Mettre à jour votre profil</h2>
-				<label htmlFor="input-username" className="is-clickable">
-					Nom :
-				</label>
-				<input
-					id="input-username"
-					type="text"
-					className="input"
-					// value={currentUser.last_name}
-					name="username"
-					onChange={() => console.log("lalala")}
-				/>
-				<label htmlFor="input-email" className="is-clickable">
-					Email :
-				</label>
-				<input id="input-email" type="email" value={this.state.email} onChange={() => console.log("lalala")} className="input" name="email" />
-				<button className="btn">ok</button>
-			</form>
+				{ this.context.currentUser !== null && 
+				<form
+					className="form"
+					onChange={this.handleChange}
+					onSubmit={this.updateUser}
+					encType="multipart/form-data"
+				>
+					<h2 className="title">Mettre à jour votre profil</h2>
+					<label htmlFor="input-username" className="is-clickable">
+						Nom :
+					</label>
+					<input
+						id="input-username"
+						type="text"
+						className="input"
+						defaultValue={this.context.currentUser.last_name}
+						name="last_name"
+					/>
+					<label htmlFor="input-username" className="is-clickable">
+						Prénom :
+					</label>
+					<input
+						id="input-username"
+						type="text"
+						className="input"
+						defaultValue={this.context.currentUser.first_name}
+						name="first_name"
+					/>
+					<label htmlFor="input-email" className="is-clickable">
+						Email :
+					</label>
+					<input
+						id="input-email"
+						type="email"
+						defaultValue={this.context.currentUser.email}
+						className="input"
+						name="email"
+					/>
+					<button className="btn">ok</button>
+				</form>
+	}
 			</div>
-		)
+		);
 	}
 }

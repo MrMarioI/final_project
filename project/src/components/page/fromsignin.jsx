@@ -21,7 +21,7 @@ export default class FormSignin extends Component {
 
 		this.context.signin(this.state, () => {
 			console.log(this.props.history, "this.props.history.push");
-			this.props.history.push('/dashboard', { userId });
+			this.props.history.push('/dashboard', userId);
 		});
 	};
 

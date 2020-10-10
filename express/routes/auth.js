@@ -62,9 +62,9 @@ router.get("/get-user-by-token", (req, res) => {
   try {
     const user = auth.decodeToken(req.header("x-authenticate"));
     const userId = user.infos.userId;
-    console.log("should be user", user);
+    console.log("should be user", user.infos.userId);
     console.log("should show :", userId);
-    res.redirect("/users/" + userId);
+    res.send(user);
   } catch (err) {
     res.status(500).json(err.message);
   }

@@ -1,16 +1,20 @@
 import React from 'react';
 import './../../styles/tables.css';
 
+
+
 export default function Manage_users() {
 	// state = {
 	//   users: []
 	// }
 
-	// async componentDidMount () {
-	//   const apiRes = await handler.getAll()
-	//   this.setState({ users: apiRes.data })
-	// }
-	// const { users } = this.state;
+//  componentDidMount () {
+// 	  const apiRes = await handler.getAll()
+// 	  this.setState({ users: apiRes.data })
+// 	};
+
+
+	const { users } = this.state;
 	return (
 		<div>
 			<h1 className="form-title">Edition et suppression des users !</h1>
@@ -26,13 +30,14 @@ export default function Manage_users() {
 				</a>
 			</ul>
 			<hr />
-			<h1 className="form-title">Liste des utilisateurs </h1>
-			<ul>
-			<li>Nom :</li>
-			<li>Mail :</li>
-			<li>Supprimer</li>
-			<li>Modifier</li>
-			</ul>
-		</div>
-	);
-}
+			{/* <h1 className="form-title">Liste des utilisateurs </h1>
+			{users.map((users, i) => (
+			<div key={i}>
+			<li>Nom :{user.last_name}</li>
+			<li>Mail :{user.email}</li>
+			<li>Supprimer</li> */}
+			{/* </div> */}
+		
+	// ))}
+	</div>
+	)}
