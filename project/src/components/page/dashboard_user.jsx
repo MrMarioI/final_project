@@ -1,20 +1,20 @@
 import React from 'react';
 import { Route, Link, useRouteMatch, Switch } from 'react-router-dom';
 import Dashboard from './dashboard'
+import DashboardAdmin from './dashboard_admin'
 import ProfilEdit from './../profil_edit'
 
 export default function Dashboard_user() {
-	let { path, url } = useRouteMatch("/:userId");
+	let { path, url } = useRouteMatch();
+	
 	
 
   return (
 	<>
 		<h1 className="form-title">Bienvenue sur votre profil !</h1>
+		<Link to={url + "/dashboard_admin"}>Administrateur</Link>
 			<ul>
  				<li>
- 					<Link to={url} className="userlinks">
- 						Votre profil
- 					</Link>
  					<ul className="sous">
  						<li>
  							<Link to={url + "/profil_edit"}>Modifier votre profil</Link>
@@ -28,9 +28,10 @@ export default function Dashboard_user() {
  			<hr />
 
 			 <Switch>
-				 <Route exact path={path} ><Dashboard/> </Route>
-				 <Route path={path + "profil_edit" }> <ProfilEdit/></Route>
-				 < Route path={path + "delete_profil" }/> 
+				 <Route exact path={path} component={Dashboard}/>
+				 <Route path={path + "dashboard_admin"} component={DashboardAdmin}/>
+				 <Route path={path + "profil_edit"} component={ProfilEdit}/>
+				 {/* < Route path={path + "delete_profil" }/>  */}
 				 {/* <Route path="/delete_profile" component={deleteProfile}/> */}
 			 </Switch>
  			

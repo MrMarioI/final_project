@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Buttons from './Buttons';
+import Buttons from './buttons';
 import { ApiHandler } from './../api/handler';
+import './../styles/contact.css'
 // import { useHistory } from 'react-router-dom'
 const handler = ApiHandler();
 
@@ -17,7 +18,7 @@ export default class FormContact extends Component {
 	handleChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
 	handleSubmit = async (e) => {
-		e.preventDefault(); // classique : empêche l'event submit du formulaire de rafraîchir la page
+		e.preventDefault(); // empêche l'event du formulaire de rafraîchir la page
 		const { name, email, ville, message } = this.state; // destructuration de l'objet this.state
 		try {
 			await handler.post('/contact', {
@@ -42,10 +43,11 @@ export default class FormContact extends Component {
 
 	render() {
 		return (
+			<div>
 			<form
 				method="post"
 				action="/"
-				className="form"
+				className="formcontact"
 				id="form_user"
 				onChange={this.handleChange}
 				onSubmit={this.handleSubmit}
@@ -93,8 +95,9 @@ export default class FormContact extends Component {
 				</label>
 				<input type="text" className="text" defaultValue={this.state.message} name="message" />
 
-				<Buttons type="submit" aria-label="Envoyer" className="button button-primary white" text="Envoyer" />
+				<Buttons type="submit" aria-label="Envoyer" className="button button-primary" text="Envoyer" />
 			</form>
+			</div>
 		);
 	}
 }

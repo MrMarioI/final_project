@@ -57,6 +57,7 @@ export default class AuthProvider extends Component {
   setCurrentUser = (infos, clbk) => {
     // on met à jour le state du AuthProvider avec les infos user mises à jour, mais :
     this.setState({ currentUser: infos }, () => {
+      console.log("HEY :", infos)
       // setState est ASYNC !!!
       if (clbk) clbk() // on utilise le callback du SetState AVANT d'exécuter le callback fourni par le component Signin, Signout ou autre !
     })
@@ -82,6 +83,9 @@ export default class AuthProvider extends Component {
       // console.error(err.response.data); // si erreur ...
     }
   }
+
+  isAdmin = () => this.state.currentUser && this.state.currentUser === "1";
+
 
   /**
    * Supprime le token d'authentification et détruit la session côté backend
@@ -126,6 +130,7 @@ export default class AuthProvider extends Component {
       signin: this.signin,
       signup: this.signup,
       signout: this.signout,
+      isAdmin: this.isAdmin,
       isSignedIn: this.isSignedIn()
     }
 

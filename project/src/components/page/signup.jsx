@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AuthContext from './../auth/AuthContext';
-import Buttons from './../Buttons';
-import './../../styles/contact.css';
+import Buttons from '../buttons';
+import './../../styles/signup.css';
 import './../../styles/buttons.css';
 // import AuthProvider from '../auth/AuthProvider
 
@@ -11,10 +11,12 @@ export default class Signup extends Component {
 		first_name: '',
 		last_name: '',
 		email: '',
-		password: ''
+		password: '',
+		selectedFile: null
 	};
 
 	createUser = async (e) => {
+		alert('Inscription validée ! Bienvenue !');
 		e.preventDefault(); // Empêche l'event submit du formulaire de rafraîchir la page
 		// await axios.post("http://localhost:5555/signup", this.state)
 		console.log('>GOOD');
@@ -22,17 +24,13 @@ export default class Signup extends Component {
 
 	static contextType = AuthContext; // la classe Signup est désormais 'abonnée' au AuthProvider
 
-	fileInput = React.createRef(); // on créé une référence ici, utilisée sur le l'input file plus bas
-	// https://fr.reactjs.org/docs/uncontrolled-components.html#the-file-input-tag
-
 	handleInput = (e) => this.setState({ [e.target.name]: e.target.value });
 
 	handleSubmit = async (e) => {
 		e.preventDefault(); // empêche l'event submit du formulaire de rafraîchir la page
 		const { first_name, last_name, email, password } = this.state;
-		console.log("HEY HANDLESUBMIT") // destructuration de l'objet this.state
+		console.log('HEY HANDLESUBMIT'); // destructuration de l'objet this.state
 		// console.log(first_name, last_name, email, password)
-		// await axios.post('http://localhost:5555/signup', { first_name, last_name, email, password });
 		this.context.signup(this.state, () => {
 			this.props.history.push('/signin');
 		});
@@ -45,8 +43,8 @@ export default class Signup extends Component {
 				<p className="form-subtitle">
 					Utilisez ce formulaire pour vous inscrire et accéder à un espace personnel !{' '}
 				</p>
-				
-				<form onChange={this.handleInput} onSubmit={this.handleSubmit}>
+
+				<form className="newuser" onChange={this.handleInput} onSubmit={this.handleSubmit}>
 					<div className="form-item-wrapper flexed-item">
 						<label htmlFor="first_name" className="label-ref label">
 							Prénom :
@@ -104,7 +102,7 @@ export default class Signup extends Component {
 						/>
 					</div>
 					<div>
-						<Buttons className="button button-primary white" text="Inscription" />
+						<Buttons className="button button-primary white ok" text="Inscription" />
 					</div>
 				</form>
 				<p className="form-sub-infos">

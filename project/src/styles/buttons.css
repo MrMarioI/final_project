@@ -22,8 +22,8 @@ button:focus {
 .button-primary {
     display: flex;
     flex-wrap: wrap;
-    color: white;
-    background: black;
+    color: black;
+    background: white;
     border: 1px solid;
     font-size: 1rem;
     transition: all 0.2s ease-in;
@@ -45,8 +45,8 @@ button:focus {
 }
 
 /* Shopcart button */
-
+/* 
 .cart {
     width: 20px;
     border: 1px solid black;
-}
+} */

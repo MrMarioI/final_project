@@ -1,8 +1,10 @@
-const { query } = require('../config/mysql');
+const {
+  query
+} = require('../config/mysql');
 
 class TypeModel {
 
-  constructor(galerie) { 
+  constructor(galerie) {
     this.typePhotoName = galerie.typePhotoName;
     this.typePhotoId = galerie.typePhotoId;
   }
@@ -15,8 +17,8 @@ class TypeModel {
   }
 
   // Read
-// Tout
-  static async getAll(){
+  // Tout
+  static async getAll() {
     const request = 'SELECT * FROM TypePhoto';
     return query(request);
   }
@@ -33,11 +35,11 @@ class TypeModel {
     return query(request, [typePhotoId]);
   }
 
- static async getByType(typePhoto) {
-   const request = 'SELECT * FROM Photos WHERE typePhotoId = ?';
-return query(request, [typePhoto]);
- }
- 
+  static async getByType(typePhoto) {
+    const request = 'SELECT * FROM Photos WHERE typePhotoId = ?';
+    return query(request, [typePhoto]);
+  }
+
 }
 
 module.exports = TypeModel;

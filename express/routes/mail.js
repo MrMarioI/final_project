@@ -41,7 +41,7 @@ router.post('/', async (req, res, next) => {
   sendMail(req.body)
     .then(() => {
       console.log('?? mail res')
-      res.status(200).json('/contact')
+      res.status(200).send('/contact')
     })
     .catch(err => {
       console.error('???', err)

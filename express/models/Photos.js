@@ -1,34 +1,36 @@
-const { query } = require('../config/mysql');
+const {
+  query
+} = require('../config/mysql');
 
-class Photos {
+class PhotosModel {
 
-  constructor(photo) {
-    this.photoId = photo.photoId;
-    this.date = photo.date;
-    this.type = photo.typePhotosId;
-    this.taille = photo.taille;
-    this.user = photo.userId;
+  constructor(Photos) {
+    this.typePhotosId = Photos[1];
+    this.images = Photos[0];
+    this.user = Photos[1];
   }
 
   // Create
 
-  async addNew() {
-    const request = `INSERT INTO Photos (photoId, date, taille) VALUES (?, ?, ?)`;
-    return query(request, [this.photoId, this.date, this.taille]);
+  async addPhoto() {
+    // console.log("ADDNEW", this.typePhotosId);
+    const request = `INSERT INTO Photos (typePhotosId, images, userId) VALUES ( ?, ?, ?)`;
+    return query(request, [this.typePhotosId, this.images, this.user]);
   }
-
   // Read
 
-  static async getAll(){
+  // Toutes les photos ajoutées.
+  static async getAll(Photos) {
     const request = 'SELECT * FROM Photos';
-    return query(request);
+    return query(request, [Photos]);
   }
 
-// faire la requête afin d'afficher la photo correspondant à la galerie séléctionnée.
-  static async getByType(typeId) {
-    const request = 'SELECT * FROM Photos WHERE typeId = ?';
-    return query(request, [typeId]);
+  // faire la requête afin d'afficher la photo correspondant à la galerie séléctionnée.
+  static async getByType(typePhotoId) {
+    const request = 'SELECT * FROM Photos WHERE typePhotosId = ?';
+    return query(request, [typePhotoId]);
   }
+
 
   static async getById(photoId) {
     const request = 'SELECT * FROM Photos WHERE photoId = ?';
@@ -38,10 +40,10 @@ class Photos {
   //  Il faut récupérer les photos correspondant à un user
 
   static async getPhotoUser(Photos) {
-const request = 'SELECT * FROM Photos WHERE ownerId = ?;';
-return query(request, [Photos]);
+    const request = 'SELECT * FROM Photos WHERE userId = ?;';
+    return query(request, [Photos]);
   }
 
 }
 
-module.exports = Photos;
+module.exports = PhotosModel;

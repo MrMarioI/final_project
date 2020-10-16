@@ -1,10 +1,8 @@
-const router = new require('express').Router()
 const bcrypt = require('bcrypt')
-const auth = require('./../auth/auth')
 const mysql = require('mysql')
 const express = require('express')
-const session = require('express-session')
-const bodyParser = require('body-parser')
+const router = express.Router()
+const auth = require('./../auth/auth')
 const UserModel = require('./../models/User')
 
 // GET : /user (récupérer tous les users)
@@ -33,20 +31,20 @@ router.delete('/:id', async (req, res, next) => {
     next(err)
   }
 })
-
 // PUT (mettre à jour un user)
-router.put('profil_edit/', async (req, res, next) => {
-  try {
-    const updatedUser = await UserModel.put(
-      req.params.first_name,
-       req.params.last_name, 
-       req.params.email,
-       req.params.userId, // req.params.id correspond à l'id passé en URL
-    )
-    console.log('CURRENT USER', currentUser);
-    res.json(Users)
-  } catch (err) {
-    next(err)
-  }
-})
+// router.patch('/profil_edit/:userId', async (req, res, next) => {
+//   console.log(" TEST UPDATE",req.body);
+//   try {
+//     const updatedUser = await UserModel.put(
+//       req.params.first_name,
+//        req.params.last_name, 
+//        req.params.email,
+//        req.params.userId,
+//       { new: true }
+//     );
+//     res.json(updatedUser);
+//   } catch (err) {
+//     next(err)
+//   }
+// })
 module.exports = router

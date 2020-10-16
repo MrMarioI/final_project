@@ -1,34 +1,24 @@
-const router = new require('express').Router()
-const uploader = require("./../config/cloudinary");
-const PhotoModel = require('./../models/Photos')
-const galeriesModel = require('./../models/Galeries')
+const bcrypt = require('bcrypt')
+const mysql = require('mysql')
+const express = require('express')
+const router = express.Router()
+const auth = require('./../auth/auth')
+const uploader = require('./../config/cloudinary')
+const PhotosModel = require('./../models/Photos');
+const TypeModel = require('./../models/TypePhoto');
 
-// GET : /photos (toutes les photos)
-router.get('/', async (req, res, next) => {
-  try {
-    const photos = await PhotoModel.getAll();
+// GET : /photos (on récupère toutes les photos)
+router.get('/photos', async (req, res, next) => {
+    const photos = await PhotosModel.getAll();
     console.log("ici")
-    res.json(photos)
-  } catch (err) {
-    next(err)
-  }
+    res.send(photos)
 })
 
-// router.get("/sort-by-price", async (req, res, next) => {
-//   try {
-//     if (!req.query.sort) throw new Error("Missing sort query parameter");
-//     const products = await ProductModel.find().sort({ price: req.query.sort === "asc" ? 1 : -1 });
-//     res.json(products);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
-
-// GET (récupérer une photo de la bdd grâce à son _id )
-router.get('/:id', async (req, res, next) => {
+// GET (récupérer une photo de la db grâce à son Id )
+router.get('/typePhotosId', async (req, res, next) => {
   try {
-    const photos = await PhotoModel.findById(req.params.id)
-    res.json(photos)
+    const photos = await PhotoModel.getByType([req.file.path, req.body])
+    res.send(photos)
   } catch (err) {
     next(err)
   }
@@ -36,34 +26,52 @@ router.get('/:id', async (req, res, next) => {
 
 // POST (poster une nouvelle photo)
 router.post('/add_photos', uploader.single("photos"), async (req, res, next) => {
-  const photo = new PhotoModel(req.body);
-// ajouter cloudinary  ici (ref auth signup)
-
+  // ajouter cloudinary  ici (ref auth signup)
+  const newPicture = req.body;
+  // console.log(">>>>>>>>>>>=========>>>>>>>>>>>> PICTURE", req.body);
+  // const {
+  //   photos
+  // } = req.file;
+  // console.log(" ON TEST BODY.FILE >>>>>>>>>>>>>>>>>>>>>", req.file);
+  if (req.file) newPicture.photos = req.file.path;
+  // console.log("HEY HEY", req.file.path)
   try {
+    if (!req.file) {
+      return res.status(400).json({
+        msg: "Attention, vous n'avez ajouter aucune photo.",
+        level: "warning",
+      });
+    }
+
+    const photo = new PhotosModel([req.file.path, req.body.typePhotosId]);
+    // console.log("HEY TOI =====>", ["photo:", req.file.path, "type:", req.body.typePhotosId]);
+
+    await photo.addPhoto();
+    return res.status(200).json({
+      msg: "Photo ajoutée !",
+      level: "success"
+    });
 
   } catch (err) {
-    next(err)
+    res.status(500).json({
+      msg: 'Il y a une erreur, vérifier vos champs !' + err
+    })
   }
 })
-// DELETE (supprimer une photo de la bdd grâce à son _id)
-router.delete('/delete/:id', async (req, res, next) => {
+
+router.get("/galeries/:name", async (req, res) => {
+  const {
+    typePhotoId
+  } = req.body;
+
+
+})
+
+// DELETE (supprimer une photo de la db grâce à son Id)
+router.delete('/delete/:photoId', async (req, res, next) => {
   try {
-    const deletedPhoto = await PhotoModel.findByIdAndDelete(req.params.id)
+    const deletedPhoto = await PhotoModel.getById(req.params.photoId)
     res.json(deletedPhoto)
-  } catch (err) {
-    next(err)
-  }
-})
-
-// PATCH (mettre à jour une photo)
-router.patch('/update_photos/:id', async (req, res, next) => {
-  try {
-    const updatedPhoto = await PhotoModel.findByIdAndUpdate(
-      req.params.id, 
-      req.body, 
-      { new: true }
-    )
-    res.json(updatedPhoto)
   } catch (err) {
     next(err)
   }

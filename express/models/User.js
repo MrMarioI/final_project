@@ -9,6 +9,7 @@ class UserModel {
     this.last_name = user.last_name;
     this.email = user.email;
     this.password = user.password;
+    this.role = user.roleId;
   }
 
   // Create
@@ -21,9 +22,9 @@ class UserModel {
   // Read
 
   //Tous les users inscrits
-  static async getAll() {
+  static async getAll(Users) {
     const request = 'SELECT * FROM Users';
-    return query(request);
+    return query(request, [Users]);
   }
 
   // Trouver les users par leur email
@@ -39,14 +40,15 @@ class UserModel {
   }
 
   // update un user.
-  static async put(first_name, last_name, email, userId) {
-    const request = 'UPDATE Users SET first_name = ?, last_name = ?, email = ? WHERE id = ?';
-    return query(request, [first_name, last_name, email]);
+  static async putUser(first_name, last_name, email, userId) {
+    const request = 'UPDATE Users SET first_name = ?, last_name = ?, email = ? WHERE userId = ?';
+    return query(request, [first_name, last_name, email, userId]);
   }
 
-  static async delete(id) {
-    const request = 'DELETE FROM Users WHERE id = ?';
-    return query(request, [id]);
+  
+  static async delete(userId) {
+    const request = 'DELETE FROM Users WHERE userId = ?';
+    return query(request, [userId]);
   }
 
 }

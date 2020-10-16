@@ -10,7 +10,7 @@ export default function Footer() {
             <footer>
                 <p className="copyright">&copy; Mario Ivanovic - 2020</p>
             <SocialFollow/>
-            <p className="mentions">Mentions Légales</p>
+            <p className="mentions"> <a href="/mentions">Mentions Légales</a> </p>
             </footer>
            
         </div>

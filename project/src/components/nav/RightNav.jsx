@@ -18,6 +18,10 @@ li{
     text-decoration: none;
 }
 
+a{
+    text-decoration: none;
+}
+
 @media (max-width: 1024px){
     flex-flow: column nowrap;
     background: whitesmoke;
@@ -34,6 +38,7 @@ li{
         height: 6vh;
         justify-self: center;
         align-self: center;  
+        text-decoration: none;
     }
 
     a{
@@ -55,9 +60,10 @@ const RightNav = ({ open }) => {
     <li> <a href="/contact">Contact</a> </li>
     <li> <a href="/signin">Connexion</a> </li>
     {AuthContextValue.isSignedIn && (
-            //  <li> <a href="/dashboard">profil</a></li> 
-               <ButtonSignout/>
-         
+        <>
+        <li> <a href="/dashboard">Profil</a> </li>
+              <li><ButtonSignout/></li> 
+         </>
         )}
     </Ul>
 

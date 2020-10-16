@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import AuthContext from './../../components/auth/AuthContext';
-import Buttons from './../Buttons';
+import Buttons from '../buttons';
 import axios from 'axios';
+import './../../styles/signin.css';
+
 
 export default class FormSignin extends Component {
 	state = {
-		// définition de valeurs de base pour la phase de dev ("mettre à chaîne vide une fois dev ok")
+		// définition de valeurs de base pour la phase de dev ("mettre à chaîne vide si dev ok")
 		email: '',
 		password: ''
 	};
@@ -20,9 +22,10 @@ export default class FormSignin extends Component {
 		// await axios.post('http://localhost:5555/signin', { userId, email, password });
 
 		this.context.signin(this.state, () => {
-			console.log(this.props.history, "this.props.history.push");
-			this.props.history.push('/dashboard', userId);
+			console.log(this.state, 'this.props.history.push');
+			this.props.history.push('/dashboard');
 		});
+		console.log(this.props.history, 'this.props.history.push');
 	};
 
 	render() {
@@ -31,11 +34,7 @@ export default class FormSignin extends Component {
 				<h1 className="form-title">Connexion !</h1>
 				<p className="form-subtitle">Utilisez ce formulaire pour vous connecter et accéder à votre profil ! </p>
 
-				<form
-					id="form_user"
-					onChange={this.handleInput}
-					onSubmit={this.handleSubmit}
-				>
+				<form id="form_user" onChange={this.handleInput} onSubmit={this.handleSubmit}>
 					<label htmlFor="email" className="label-ref label">
 						Email
 					</label>

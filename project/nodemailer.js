@@ -8,7 +8,7 @@ const transporter = nodemailer.createTransport(sendgridTransport({
 
 transporter.sendMail({
     to: req.body.email,
-    from: 'ivanovic.mario@gmail.com',
+    from: 'mario@mrmarioi.fr',
     subject: 'Votre message a été envoyé',
     html: `<h1> Bienvenue sur notre site !</h1>
     <p>Voici votre identifiant et votre mot de passe</p>

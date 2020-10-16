@@ -1,0 +1,14 @@
+.about {
+    margin: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    float: none;
+}
+
+.descr {
+    width: 50%;
+    height: 50%;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}

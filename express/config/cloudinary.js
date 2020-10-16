@@ -1,5 +1,7 @@
 const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const {
+  CloudinaryStorage
+} = require("multer-storage-cloudinary");
 const multer = require("multer"); // convertit les fichiers uploadés et le met à disposition dans req.file
 
 cloudinary.config({
@@ -10,13 +12,15 @@ cloudinary.config({
 
 const storage = new CloudinaryStorage({
   cloudinary,
-  folder: "galeries",
+  params: {folder: "MrMarioI"}
   //Si besoin d'uploader de la video ...
   /*
     params: { resource_type: "raw" }
     */
 });
 
-const fileUploader = multer({ storage });
+const fileUploader = multer({
+  storage
+});
 
 module.exports = fileUploader;

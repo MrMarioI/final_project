@@ -3,7 +3,16 @@ const mysql = require('mysql')
 const express = require('express')
 const router = express.Router()
 const auth = require('./../auth/auth')
+const uploader = require('./../config/cloudinary')
+const PhotoModel = require('./../models/Photos');
+const TypeModel = require('./../models/TypePhoto');
 const UserModel = require('./../models/User')
+
+
+router.get('/users', async (req, res, next) => {
+  const users = await UserModel.getAll();
+  res.send(users);
+})
 
 // POST (créer un nouveau user)
 
@@ -53,9 +62,9 @@ router.post('/signup', async (req, res, next) => {
     })
   } catch (err) {
     res.status(500).json({
-      msg : 'Il y a une erreur, vérifier vos champs !' + err })
+      msg: 'Il y a une erreur, vérifier vos champs !' + err
+    })
   }
-
 })
 
 router.get("/get-user-by-token", (req, res) => {
@@ -74,7 +83,10 @@ router.get("/get-user-by-token", (req, res) => {
 // Connection si user inscrit.
 
 router.post("/signin", async (req, res, next) => {
-  const {email, password} = req.body; //
+  const {
+    email,
+    password
+  } = req.body; //
   // console.log("HEY GAMIN >>>>", req.body);
   // check que mail et mdp sont renseignés
   if (!email || !password) {
@@ -88,63 +100,66 @@ router.post("/signin", async (req, res, next) => {
   // si oui : vérifier que mail et mdp correspondent en bdd
   console.log("On se retrouve ici", req.body);
   // 1 - récupérer l'utilisateur avec le mail fourni 
-  try{
-    const currentUser = await UserModel.getByMail(email) 
+  try {
+    const currentUser = await UserModel.getByMail(email)
     // console.log("HEY MAN TEST ------> ICI --->", await UserModel.getByMail(email))
-  //console.log("Un peu plus dans signin", req.body);
-  //console.log(" => ESSAI :", currentUser, email);
-      if (!currentUser[0]) {
-        // vaut null si pas d'user trouvé pour le mail
-        return res.status(401).json({
-          msg: "Identifiants incorrects",
-          level: "error",
-        });
-      }
-      console.log("ON ARRIVE ICI")
-      // si oui comparer le mdp crypté stocké en bdd avec la chaîne en clair envoyée depuis le formulaire
-      console.log("PASSWORD CURRENTUSER--->", currentUser[0].password);
-      console.log("PASSWORD --->", password);
-      const checkPassword = bcrypt.compareSync(
-        password,
-        currentUser[0].password
-
-         // password provenant du form "texte plein"
-         // password stocké en bdd (encrypté)
-      ); // checkPassword vaut true || false
-console.log("Encore plus loin signin");
-      // si le mdp est incorrect: retourner message error sur signin
-      if (checkPassword === false) {
-        // req.flash("error", "Identifiants incorrects");
-        return res.status(401).json({
-          msg: "Identifiants incorrects",
-          level: "error",
-        });
-      }
-console.log("Toujours plus loin signin", currentUser[0]);
-      // si oui : stocker les infos de l'user en session pour lui permettre de naviguer jusqu'au signout
-      const user = currentUser[0];
-      const clone = {...user}; // On clone l'user 
-      console.log(clone)
-      delete clone.password; // par sécurité, on supprime le mdp du clone (pas besoin de le stocker ailleurs qu'en bdd)
-      console.log("ALALALALALALALALALALALALALAAL")
-      // req.session.user = clone; // On inscris le clone dans la session (pour maintenir un état de connexion)
-      
-      const token = auth.createToken(clone, req.userId); // createToken retourne un jeton (token) créé avec JWT
-console.log("fin de signin");
-      return res
-        .header("x-authenticate", token) // On renvoie le token au client dans l'entête de la réponse pour l'authentification
-        .status(200)
-        .send({
-          user: clone,
-          token,
-          msg: "logged in !",
-          level: "success"
-        });
-    }catch (err) {
-      console.log("----> FIN SIGNIN <-----", req.body);
-      res.status(500).json({
-        msg : 'Il y a une erreur, vérifier vos champs !' + err })
+    //console.log("Un peu plus dans signin", req.body);
+    //console.log(" => ESSAI :", currentUser, email);
+    if (!currentUser[0]) {
+      // vaut null si pas d'user trouvé pour le mail
+      return res.status(401).json({
+        msg: "Identifiants incorrects",
+        level: "error",
+      });
     }
+    console.log("ON ARRIVE ICI")
+    // si oui comparer le mdp crypté stocké en bdd avec la chaîne en clair envoyée depuis le formulaire
+    console.log("PASSWORD CURRENTUSER--->", currentUser[0].password);
+    console.log("PASSWORD --->", password);
+    const checkPassword = bcrypt.compareSync(
+      password,
+      currentUser[0].password
+
+      // password provenant du form "texte plein"
+      // password stocké en bdd (encrypté)
+    ); // checkPassword vaut true || false
+    console.log("Encore plus loin signin");
+    // si le mdp est incorrect: retourner message error sur signin
+    if (checkPassword === false) {
+      // req.flash("error", "Identifiants incorrects");
+      return res.status(401).json({
+        msg: "Identifiants incorrects",
+        level: "error",
+      });
+    }
+    console.log("Toujours plus loin signin", currentUser[0]);
+    // si oui : stocker les infos de l'user en session pour lui permettre de naviguer jusqu'au signout
+    const user = currentUser[0];
+    const clone = {
+      ...user
+    }; // On clone l'user 
+    console.log(clone)
+    delete clone.password; // par sécurité, on supprime le mdp du clone (pas besoin de le stocker ailleurs qu'en bdd)
+    console.log("ALALALALALALALALALALALALALAAL")
+    // req.session.user = clone; // On inscris le clone dans la session (pour maintenir un état de connexion)
+
+    const token = auth.createToken(clone, req.userId); // createToken retourne un jeton (token) créé avec JWT
+    console.log("fin de signin");
+    return res
+      .header("x-authenticate", token) // On renvoie le token au client dans l'entête de la réponse pour l'authentification
+      .status(200)
+      .send({
+        user: clone,
+        token,
+        msg: "logged in !",
+        level: "success"
+      });
+  } catch (err) {
+    console.log("----> FIN SIGNIN <-----", req.body);
+    res.status(500).json({
+      msg: 'Il y a une erreur, vérifier vos champs !' + err
+    })
+  }
 });
 
 // Destruction de la session (déconnection de l'user)
@@ -153,5 +168,52 @@ router.get("/signout", (req, res) => {
   const x = req.session.destroy();
   res.json(x);
 });
+
+// PUT (mettre à jour un user)
+router.put('/profil_edit/:userId', async (req, res, next) => {
+  console.log(" TEST UPDATE", req.body);
+  try {
+    const {
+      first_name,
+      last_name,
+      email
+    } = req.body;
+    const {
+      userId
+    } = req.params;
+
+    const updatedUser = await UserModel.putUser(first_name, last_name, email, userId);
+    // const updatedUser = await UserModel.putUser(
+    //   req.body.first_name,
+    //    req.body.last_name, 
+    //    req.body.email,
+    //    req.params.userId
+    //   // { new: true }
+    // );
+    console.log("req.params", updatedUser);
+    res.send({
+      first_name,
+      last_name,
+      email
+    });
+  } catch (err) {
+    next(err)
+  }
+})
+
+// DELETE  (supprimer un user de la db grâce à userId)
+router.delete("/delete/:userId", async (req, res, next) => {
+  console.log("DELETE", req.params)
+  try {
+    const {
+      userId
+    } = req.params;
+    const deletedUser = await UserModel.delete(userId); // req.params.id correspond à l'id passé en URL
+    res.json(deletedUser);
+  } catch (err) {
+    next(err);
+  }
+});
+
 
 module.exports = router;

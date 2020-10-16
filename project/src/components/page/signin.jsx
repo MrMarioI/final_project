@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import AuthContext from "./../../components/auth/AuthContext";
 import FormSignin from './../../components/page/fromsignin'
-import Buttons from './../Buttons';
+import Buttons from '../buttons';
+import './../../styles/contain.css';
+
 
 
 
@@ -13,7 +15,7 @@ componentDidMount () {
 
 	render() {
 		return (
-			<div>
+			<div className="contain">
 		
 			<FormSignin history={this.props.history}/>
 	

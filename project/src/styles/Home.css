@@ -38,6 +38,7 @@ img {
 @media only screen and (max-width: 1024px) {
   .homegrid {
     margin: 50px 0 0;
+    width: 320px;
     margin-bottom: 10px;
     display: grid;
     grid-row: 1;
@@ -48,11 +49,15 @@ img {
     align-items: center;
   }
 
+  div{
+    width: 320px;
+    height: 230px;
+  }
 
 
   img {
-    height: 250px;
-    width: 350px;
+    height: 230px;
+    width: 320px;
     margin: 10px;
   }
 
