@@ -5,6 +5,7 @@ footer {
     flex-wrap: wrap;
     position: absolute;
     bottom: 6;
+    clear: both;
 }
 
 .social {
@@ -56,25 +57,27 @@ figure>a {
 
 @media only screen and (max-width: 1024px) {
     footer {
-        height: 50px;
+        height: 15px;
         width: 100%;
         display: flex;
         flex-wrap: wrap;
         position: absolute;
         bottom: 6;
         margin: 5px;
-        margin-top: 60px
+        margin-top: 90px
     }
 
-    hr {
-        margin-top: 60px
-    }
+    /* hr {
+        margin-top: 60px;
+        width: 100%;
+    } */
 
     .social {
         display: flex;
         flex-wrap: wrap;
         height: 30px;
         width: 30px;
+        padding-top: 15px;
         margin: 0 5px 0 5px;
         justify-items: space-evenly;
         align-items: center;
@@ -115,8 +118,9 @@ figure>a {
     }
 
     .mentions {
-        margin-top: -10px;
+        margin-top: -161px;
         margin-left: 60%;
+        display: flex;
     }
 
 }

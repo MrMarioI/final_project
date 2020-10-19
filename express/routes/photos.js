@@ -8,16 +8,15 @@ const PhotosModel = require('./../models/Photos');
 const TypeModel = require('./../models/TypePhoto');
 
 // GET : /photos (on récupère toutes les photos)
-router.get('/photos', async (req, res, next) => {
-    const photos = await PhotosModel.getAll();
-    console.log("ici")
-    res.send(photos)
+router.get('/', async (req, res, next) => {
+  const photos = await PhotosModel.getAll();
+  res.send(photos)
 })
 
 // GET (récupérer une photo de la db grâce à son Id )
-router.get('/typePhotosId', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
-    const photos = await PhotoModel.getByType([req.file.path, req.body])
+    const photos = await PhotoModel.getByType()
     res.send(photos)
   } catch (err) {
     next(err)
@@ -29,9 +28,7 @@ router.post('/add_photos', uploader.single("photos"), async (req, res, next) => 
   // ajouter cloudinary  ici (ref auth signup)
   const newPicture = req.body;
   // console.log(">>>>>>>>>>>=========>>>>>>>>>>>> PICTURE", req.body);
-  // const {
-  //   photos
-  // } = req.file;
+  // const { photos } = req.file;
   // console.log(" ON TEST BODY.FILE >>>>>>>>>>>>>>>>>>>>>", req.file);
   if (req.file) newPicture.photos = req.file.path;
   // console.log("HEY HEY", req.file.path)
@@ -59,18 +56,13 @@ router.post('/add_photos', uploader.single("photos"), async (req, res, next) => 
   }
 })
 
-router.get("/galeries/:name", async (req, res) => {
-  const {
-    typePhotoId
-  } = req.body;
-
-
-})
-
 // DELETE (supprimer une photo de la db grâce à son Id)
 router.delete('/delete/:photoId', async (req, res, next) => {
   try {
-    const deletedPhoto = await PhotoModel.getById(req.params.photoId)
+    const {
+      photoId
+    } = req.params;
+    const deletedPhoto = await PhotoModel.getById(photoId)
     res.json(deletedPhoto)
   } catch (err) {
     next(err)

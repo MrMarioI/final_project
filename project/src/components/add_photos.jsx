@@ -10,7 +10,8 @@ class add_photos extends Component {
 	state = {
 		photoId: '',
 		typePhotosId: '',
-		userId: ''
+		userId: '',
+		userlist: []
 	};
 
 	static contextType = AuthContext;
@@ -18,6 +19,11 @@ class add_photos extends Component {
 	handleInput = (e) => this.setState({ [e.target.name]: e.target.value });
 
 	fileInput = React.createRef();
+
+	async componentDidMount() {
+		const apiRes = await handler.get('/users');
+		this.setState({ userlist: apiRes.data });
+	}
 
 	handleSubmit = async (evt) => {
 		evt.preventDefault();
@@ -82,7 +88,11 @@ class add_photos extends Component {
 							<option value="2">Mariages</option>
 							<option value="4">Paysages</option>
 							<option value="3">Portraits</option>
-							{/* <option value="">Portraits</option> */}
+							{
+								this.state.userlist.map((user => ( 
+								<option value={user.userId}>{user.first_name} {user.last_name}</option>
+								)))
+							}
 						</select>
 					</div>
 					<Buttons type="submit" className="button button-primary white" text="Publier" />

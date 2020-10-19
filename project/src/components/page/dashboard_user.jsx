@@ -12,7 +12,6 @@ export default function Dashboard_user() {
   return (
 	<>
 		<h1 className="form-title">Bienvenue sur votre profil !</h1>
-		<Link to={url + "/dashboard_admin"}>Administrateur</Link>
 			<ul>
  				<li>
  					<ul className="sous">

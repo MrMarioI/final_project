@@ -6,7 +6,7 @@ class PhotosModel {
 
   constructor(Photos) {
     this.typePhotosId = Photos[1];
-    this.images = Photos[0];
+    this.src = Photos[0];
     this.user = Photos[1];
   }
 
@@ -14,8 +14,8 @@ class PhotosModel {
 
   async addPhoto() {
     // console.log("ADDNEW", this.typePhotosId);
-    const request = `INSERT INTO Photos (typePhotosId, images, userId) VALUES ( ?, ?, ?)`;
-    return query(request, [this.typePhotosId, this.images, this.user]);
+    const request = `INSERT INTO Photos (typePhotosId, src, userId) VALUES ( ?, ?, ?)`;
+    return query(request, [this.typePhotosId, this.src, this.user]);
   }
   // Read
 
@@ -42,6 +42,11 @@ class PhotosModel {
   static async getPhotoUser(Photos) {
     const request = 'SELECT * FROM Photos WHERE userId = ?;';
     return query(request, [Photos]);
+  }
+
+  static async deletePhoto(photoId){
+    const request = 'DELETE FROM Photos WHERE photoId = ?';
+    return query(request, [photoId])
   }
 
 }

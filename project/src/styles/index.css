@@ -1,6 +1,6 @@
 @import "./contact.css";
 @import "./NavMain.css";
-@import "./Home.css";
+@import "./home.css";
 @import "./footer.css";
 @import "./tables.css";
 
@@ -15,12 +15,16 @@ html {
 }
 
 body {
- height: 100%;
+ height: auto;
 }
 
 main{
 min-height: calc(100vh - 100px);
+margin: auto;
+height: auto;
 }
+
+
 
 /* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

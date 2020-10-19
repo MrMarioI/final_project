@@ -58,13 +58,14 @@ const RightNav = ({ open }) => {
     <li> <a href="/galeries/paysages">Paysages</a> </li>
     <li> <a href="/galeries/portraits">Portraits</a> </li>
     <li> <a href="/contact">Contact</a> </li>
-    <li> <a href="/signin">Connexion</a> </li>
     {AuthContextValue.isSignedIn && (
         <>
         <li> <a href="/dashboard">Profil</a> </li>
               <li><ButtonSignout/></li> 
          </>
         )}
+    <li> <a href="/signin">Connexion</a> </li>
+    
     </Ul>
 
     )
