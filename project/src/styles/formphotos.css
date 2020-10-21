@@ -1,0 +1,5 @@
+.add_photos{
+    color: black;
+    display: flex;
+    flex-wrap: wrap;
+}

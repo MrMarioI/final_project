@@ -11,7 +11,7 @@ export default class manage_users extends Component {
 
 	static contextType = AuthContext;
 
-	async componentDidMount() {
+	async componentDidMount(e) {
 		const apiRes = await handler.get('/users');
 		this.setState({ users: apiRes.data });
 	}
@@ -19,6 +19,8 @@ export default class manage_users extends Component {
 	handleDelete = async (userId) => {
 		const apiRes2 = await handler.delete('/delete/' + userId);
 		this.setState({ users: apiRes2.data });
+		const apiRes = await handler.get('/users');
+		this.setState({ users: apiRes.data });
 	};
 
 	render() {
@@ -55,7 +57,7 @@ export default class manage_users extends Component {
 					))}
 				</div>
 				</>
-				)}
+			 )}
 			</div>
 		);
 	}

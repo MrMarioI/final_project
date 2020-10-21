@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Buttons from './buttons';
 import AuthContext from './auth/AuthContext';
 import { ApiHandler } from './../api/handler';
-
+import './../styles/formphotos.css'
 const handler = new ApiHandler();
 
 class add_photos extends Component {

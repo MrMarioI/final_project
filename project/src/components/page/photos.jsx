@@ -1,40 +1,72 @@
-import React, { Component } from 'react'
-import { ApiHandler } from './../../api/handler'
-import AuthProvider from './../auth/AuthContext'
-import './../../styles/tables.css'
-import axios from 'axios'
+// import React, { useState, useEffect, useCallback } from "react";
+// import { useLocation} from 'react-router-dom'
+// import Gallery from 'react-photo-gallery';
+// import Carousel, { Modal, ModalGateway } from 'react-images';
+// import { ApiHandler } from './../../api/handler'
+// // import Gallery from './gallery'
 
-const handler = new ApiHandler('/galeries')
+// const handler = ApiHandler();
 
-export default class Photos extends Component {
-  state = {
-    galeries: []
-  }
 
-  static contextType = AuthProvider;
+// export default function Photos() {
+//  	// const { data } = axios.get(
+//  	// 	process.env.REACT_APP_BACKEND_URL + '/galeries/' + this.props.match.params.name
+// 	 // );
+// 	 const Location = useLocation().pathname
+// 	console.log("LOG ICI  LOG", Location);
+// 	const [ currentImage, setCurrentImage ] = useState(0);
+// 	const [photos, setPhotos] = useState([]);
+// 	const [ viewerIsOpen, setViewerIsOpen ] = useState(false);
+// 	// const images = useState(display)
 
-  async componentDidMount () {
-    const apiRes = await axios.get('http://localhost:5555/photos')
-    const photos = apiRes.data.filter(photo => photo.user == this.context.currentUser)
-    this.setState({ galeries: photos })
-  }
 
-  render () {
-    const { galeries } = this.state
-    return (
-      <div>
-        	<h1 className="form-title">Votre galerie</h1>
-        <div className='grid'
-          data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'
-        >
-          {galeries.map((galeries, i) => (
-            <div key={i} className='grid-item'>
-              {galeries.name}
-            </div>
-          ))}
-        </div>
-      </div>
-    )
-  }
-}
+// 	useEffect(() => {
+// 		const getPhotos = async () => {
+// 			//process.env.REACT_APP_BACKEND_URL + "/galeries")
+// 			const apiRes = await handler.get("/photos"); // pour user gallery
+// 			let typePhotoId = null
+// 				// On filtre le type des photos afin que ça corresponde à l'ID du type des photos de la bdd.
+// 			const filteredPhotos = apiRes.data.filter(photo => photo.typePhotosId == typePhotoId)
+// 			const filteredPhotos2 = apiRes.data.filter(photo =>  photo.userId == userId) // user gallery
+// 			console.log("FILTER", filteredPhotos);
+// 			setPhotos(filteredPhotos2);
+// 		  };
+
+// 		  try {getPhotos()} catch (err) {
+// 			  console.error((err))
+// 		  }
+	  
+
+// 	}, []);
+
+// 	const openLightbox = useCallback((event, { photos, index }) => {
+// 		setCurrentImage(index);
+// 		setViewerIsOpen(true);
+// 	}, []);
+
+// 	const closeLightbox = () => {
+// 		setCurrentImage(0);
+// 		setViewerIsOpen(false);
+// 	};
+
+//   	return (
+// 		<>
+// 			<Gallery photos={photos} onClick={openLightbox} />              
+// 			<ModalGateway className="pictures">
+// 				{viewerIsOpen ? (
+// 					<Modal onClose={closeLightbox}>
+// 						<Carousel
+// 							currentIndex={currentImage}
+// 							views={photos.map((x) => ({
+// 								...x,
+// 								srcset: x.srcSet,
+// 								caption: x.title
+// 							}))}
+// 						/>
+// 					</Modal>
+// 				) : null}
+// 			</ModalGateway>
+// 		</>
+// 	);
+// }
 

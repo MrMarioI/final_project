@@ -5,6 +5,7 @@ button {
     background: none;
     cursor: pointer;
     margin: 10px;
+    color: black;
 }
 
 button:focus {
@@ -23,7 +24,6 @@ button:focus {
     display: flex;
     flex-wrap: wrap;
     color: black;
-    background: white;
     border: 1px solid;
     font-size: 1rem;
     transition: all 0.2s ease-in;
@@ -35,7 +35,6 @@ button:focus {
 
 .button-primary:hover {
     color: black;
-    background: white;
     border: 1px solid;
 }
 

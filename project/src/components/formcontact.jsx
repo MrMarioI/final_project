@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import Buttons from './buttons';
 import { ApiHandler } from './../api/handler';
 import './../styles/contact.css'

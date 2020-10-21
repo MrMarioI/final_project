@@ -2,7 +2,7 @@ import React from "react";
 
 import "./../styles/buttons.css"
 
-export default function MyButton(props) {
+export default function Button(props) {
   // les props sont les "arguments" de la fonction MyButton
   console.log(">>>", props);
   // ci dessous: une expression JSX :

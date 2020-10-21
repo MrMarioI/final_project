@@ -2,13 +2,13 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useLocation} from 'react-router-dom'
 import Gallery from 'react-photo-gallery';
 import Carousel, { Modal, ModalGateway } from 'react-images';
-import { ApiHandler } from './../api/handler'
-// import Gallery from './gallery'
+import { ApiHandler } from './../../api/handler'
+import './../../styles/user.css'
 
 const handler = ApiHandler();
 
 
-export default function MainGallery() {
+export default function UserGallery() {
  	// const { data } = axios.get(
  	// 	process.env.REACT_APP_BACKEND_URL + '/galeries/' + this.props.match.params.name
 	 // );
@@ -24,14 +24,11 @@ export default function MainGallery() {
 		const getPhotos = async () => {
 			//process.env.REACT_APP_BACKEND_URL + "/galeries")
 			const apiRes = await handler.get("/photos"); // pour user gallery
-			let typePhotoId = null
-			if(Location == "/galeries/concerts") typePhotoId = 1
-			if(Location == "/galeries/mariages") typePhotoId = 2
-			if(Location == "/galeries/portraits") typePhotoId = 3
-			if(Location == "/galeries/paysages") typePhotoId = 4
+			let userId = null
 				// On filtre le type des photos afin que ça corresponde à l'ID du type des photos de la bdd.
-			const filteredPhotos = apiRes.data.filter(photo => photo.typePhotosId == typePhotoId)
-			// const filteredPhotos = apiRes.data.filter(photo =>  photo.userId == userId) // user gallery
+				if(Location == "/dashboard/user_gallery") userId = userId
+
+			const filteredPhotos = apiRes.data.filter(photo =>  photo.userId == userId) // user gallery
 			console.log("FILTER", filteredPhotos);
 			setPhotos(filteredPhotos);
 		  };

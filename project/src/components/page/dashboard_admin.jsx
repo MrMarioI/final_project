@@ -1,8 +1,4 @@
 import React, { Component } from 'react'
-import AuthContext from './../auth/AuthContext';
-import AuthProvider from './../auth/AuthProvider';
-// import AuthContext from '../auth/AuthContext';
-// import Commandes from './Commandes'
 import './../../styles/dashboard_admin.css';
 import './../../styles/tables.css';
 
@@ -20,6 +16,7 @@ export default class DashboardAdmin extends Component {
 				</a>
 			</ul>
 			<hr />
+			
 			</div>
 		)
 	}

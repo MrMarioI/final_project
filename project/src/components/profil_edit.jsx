@@ -1,10 +1,10 @@
-import React, { Component, useContext } from 'react';
+import React, { Component } from 'react';
 import AuthContext from './../components/auth/AuthContext';
-import AuthProvider from './auth/AuthProvider';
 import './../styles/contact.css';
 import './../styles/buttons.css';
 import { ApiHandler } from './../api/handler';
-import axios from 'axios';
+
+
 const handler = ApiHandler();
 
 export default class profil_edit extends Component {

@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 
 // Authentication
 import { ProtectedRoute } from "./components/auth/ProtectedRoute";
-
+import AuthProvider from "./components/auth/AuthProvider";
 
 // IMPORT PAGES
 
@@ -13,16 +13,15 @@ import MainGallery from './components/main_gallery'
 import Gallery from './components/gallery'
 import Home from './components/page/home'
 import Contact from './components/page/contact'
-import Dashboard from './components/page/dashboard'
 import Dashboard_user from './components/page/dashboard_user'
 import DashboardAdmin from './components/page/dashboard_admin'
-import profilEdit from './components/profil_edit'
 import SignIn from './components/page/signin'
 import Signup from './components/page/signup'
 import NotFound from './components/page/notFound.jsx'
 import NavMain from './components/nav/navMain.jsx'
 import Manage_users from './components/page/manage_users'
 import ManagePosts from './components/page/manage_posts'
+import UserGallery from './components/page/user_gallery'
 import Add_photos from './components/add_photos'
 import Footer from './components/footer/footer'
 import Mentions from './components/footer/mentions'
@@ -35,6 +34,8 @@ import './styles/footer.css'
 function App () {
   return (
     <div className='App'>
+        <AuthProvider>
+
       <NavMain />
 
       <main>
@@ -55,6 +56,7 @@ function App () {
           <Route path='/mentions' component={Mentions} />
           <Route path='/manage_users' component={Manage_users} />
           <Route path='/manage_posts' component={ManagePosts} />
+          <Route path='/user_gallery' component={UserGallery} />
           <Route path='/add_photos' component={Add_photos} />
           {/* <Route path='/profil_edit' component={profilEdit} /> */}
 
@@ -62,8 +64,7 @@ function App () {
         </Switch>
       </main>
       <Footer />
-      <script src='jquery.watermark.js' type='text/javascript'></script>
-      <script src='/path/to/masonry.pkgd.min.js'></script>
+      </AuthProvider>
     </div>
   )
 }

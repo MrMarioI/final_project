@@ -1,3 +1,5 @@
 .react-photo-gallery--gallery{
     margin: 50%;
+    height: auto;
+    width: auto;
 }

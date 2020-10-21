@@ -1,14 +1,47 @@
 .about {
+    width: 50%;
+    height: 50%;
     margin: 40px;
     display: flex;
     flex-wrap: wrap;
     float: none;
+    justify-content: center;
+    align-items: center;
 }
 
 .descr {
-    width: 50%;
-    height: 50%;
+   width: 100%;
     padding: 10px;
+    margin: 10px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+@media only screen and (max-width: 1024px) {
+    .about {
+        margin: 40px;
+        display: flex;
+        flex-wrap: wrap;
+        float: none;
+        justify-content: center;
+    }
+    
+    .descr {
+        width: 50%;
+        height: 50%;
+        padding: 10px;
+        margin-top: 10px;
+        margin: 5px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    article{
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+    }
 }

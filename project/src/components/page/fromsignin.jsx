@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import AuthContext from './../../components/auth/AuthContext';
 import Buttons from '../buttons';
-import axios from 'axios';
 import './../../styles/signin.css';
 
 

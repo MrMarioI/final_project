@@ -7,6 +7,7 @@ p {
     width: 700px;
     margin-top: 50px;
     display: flex;
+    color: black;
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
@@ -38,8 +39,12 @@ label {
     height: 300px;
 }
 
-/* Signpup */
+button {
+    color: black;
+}
 
+/* Signpup */
+/* 
 .signup {
     width: 100%;
 }
@@ -47,7 +52,7 @@ label {
 #form-user {
     width: 200px;
     height: 90px
-}
+} */
 
 .buttoncontact{
     color: black

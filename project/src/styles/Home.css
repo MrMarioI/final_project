@@ -1,7 +1,3 @@
-main {
-  height: 1020px;
-}
-
 .homegrid {
   height: 100%;
   width: 100%;
@@ -39,6 +35,7 @@ img {
   .homegrid {
     margin: 50px 0 0;
     width: 320px;
+    height: auto;
     margin-bottom: 10px;
     display: grid;
     grid-row: 1;
@@ -49,10 +46,10 @@ img {
     align-items: center;
   }
 
-  div{
+  /* div{
     width: 320px;
     height: 230px;
-  }
+  } */
 
 
   img {
@@ -74,49 +71,4 @@ img {
     justify-self: space-evenly;
     z-index: 3;
   }
-}
-
-
-/* FIGCAPTION */
-
-.card {
-  position: relative;
-  height: 450px;
-  width: 700px;
-  overflow: hidden;
-  /* margin: 5px; */
-
-}
-
-.card>* {
-  position: relative;
-  top: 0;
-  left: 0;
-
-}
-
-.card__image {
-  display: grid;
-}
-
-.card__info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  opacity: 0;
-  font-size: 20px;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.5);
-
-  transition: opacity 300ms ease;
-}
-
-.card:hover .card__info,
-.card:focus-within .card__info {
-  opacity: 1;
-}
-
-.card__info a {
-  color: #cccccc;
 }
