@@ -37,14 +37,3 @@ export function ApiHandler() {
 
   return instance;
 }
-
-// fonction pour ajout photos + categories photos
-
-// export async function post(formData) {
-//   await axios.post(process.env.REACT_APP_BACKEND_URL + "/photos/add_photos", formData, {
-//     headers: {
-//       'Content-Type': "multipart/form-data",
-//       "x-authenticate": window.localStorage.getItem(tokenName)
-//     }
-//   })
-// };

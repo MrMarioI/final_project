@@ -39,7 +39,6 @@ function App () {
       <NavMain />
 
       <main>
-        {/* <Dashboard/> */}
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/about' component={About} />
@@ -47,9 +46,7 @@ function App () {
           <Route path='/galeries/:name' component={MainGallery} />
           <Route path='/galerie/:name' component={Gallery} />
           <Route path='/contact' component={Contact} />
-          {/* <ProtectedRoute path="/dashboard" component={Dashboard} /> */}
           <ProtectedRoute path='/dashboard/' component={Dashboard_user} />
-          {/* <Route path='/dashboard_admin' component={DashboardAdmin} /> */}
           <ProtectedRoute path='/dashboard' component={DashboardAdmin}/>
           <Route path='/signin' component={SignIn} />
           <Route path='/signup' component={Signup} />
@@ -58,7 +55,6 @@ function App () {
           <Route path='/manage_posts' component={ManagePosts} />
           <Route path='/user_gallery' component={UserGallery} />
           <Route path='/add_photos' component={Add_photos} />
-          {/* <Route path='/profil_edit' component={profilEdit} /> */}
 
           <Route path='*' component={NotFound} />
         </Switch>
