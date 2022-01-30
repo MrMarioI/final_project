@@ -3,7 +3,6 @@ import { useLocation} from 'react-router-dom'
 import Gallery from 'react-photo-gallery';
 import Carousel, { Modal, ModalGateway } from 'react-images';
 import { ApiHandler } from './../api/handler'
-// import Gallery from './gallery'
 
 const handler = ApiHandler();
 
